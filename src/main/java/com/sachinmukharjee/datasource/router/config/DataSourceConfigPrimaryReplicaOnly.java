@@ -24,16 +24,17 @@ public class DataSourceConfigPrimaryReplicaOnly {
     log.debug("Creating DataSoruce for Primary & Replica Source");
     RoutingDataSource routingDataSource = new RoutingDataSource();
 
+    var primaryDataSource = hikariPrimaryConfig.buildDataSource();
+    var replicaDataSource = hikariReplicaConfig.buildDataSource();
+
     Map<Object, Object> targetDataSources =
         Map.of(
-            RouteMode.PRIMARY,
-            hikariPrimaryConfig.dataSource(),
-            RouteMode.REPLICA,
-            hikariReplicaConfig.dataSource());
+            RouteMode.PRIMARY, primaryDataSource,
+            RouteMode.REPLICA, replicaDataSource);
 
     routingDataSource.setTargetDataSources(targetDataSources);
-    routingDataSource.setDefaultTargetDataSource(targetDataSources);
+    routingDataSource.setDefaultTargetDataSource(primaryDataSource);
 
-    return hikariPrimaryConfig.dataSource();
+    return primaryDataSource;
   }
 }

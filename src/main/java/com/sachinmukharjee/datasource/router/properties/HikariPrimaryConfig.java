@@ -27,14 +27,13 @@ public class HikariPrimaryConfig extends HikariConfig {
   @Value("app.core.db.primary.validation_timeout")
   private long VALIDATION_TIMEOUT;
 
-  // create DataSourceObject
-  public DataSource dataSource() {
-      log.debug("Constructing Primary DataSource");
-    HikariDataSource dataSource = new HikariDataSource();
-    dataSource.setMaximumPoolSize(MAX_POOL_SIZE);
-    dataSource.setMinimumIdle(MIN_POOL_SIZE);
-    dataSource.setConnectionTimeout(CONNECTION_TIMEOUT);
-    dataSource.setValidationTimeout(VALIDATION_TIMEOUT);
-    return dataSource;
+  public DataSource buildDataSource() {
+    log.debug("Constructing Primary DataSource");
+    this.setMaximumPoolSize(MAX_POOL_SIZE);
+    this.setMaximumPoolSize(MAX_POOL_SIZE);
+    this.setMinimumIdle(MIN_POOL_SIZE);
+    this.setConnectionTimeout(CONNECTION_TIMEOUT);
+    this.setValidationTimeout(VALIDATION_TIMEOUT);
+    return new HikariDataSource(this);
   }
 }

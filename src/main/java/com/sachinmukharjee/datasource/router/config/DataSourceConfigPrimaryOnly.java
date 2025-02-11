@@ -22,12 +22,13 @@ public class DataSourceConfigPrimaryOnly {
     log.debug("Creating DataSoruce for Primary Source");
     RoutingDataSource routingDataSource = new RoutingDataSource();
 
-    Map<Object, Object> targetDataSources =
-        Map.of(RouteMode.PRIMARY, hikariPrimaryConfig.dataSource());
+    var primaryDataSource = hikariPrimaryConfig.buildDataSource();
+
+    Map<Object, Object> targetDataSources = Map.of(RouteMode.PRIMARY, primaryDataSource);
 
     routingDataSource.setTargetDataSources(targetDataSources);
-    routingDataSource.setDefaultTargetDataSource(targetDataSources);
+    routingDataSource.setDefaultTargetDataSource(primaryDataSource);
 
-    return hikariPrimaryConfig.dataSource();
+    return primaryDataSource;
   }
 }
