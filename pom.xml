@@ -81,22 +81,39 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.0.0</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
                 <executions>
+                    <!-- Copies the git hooks to the .git/hooks folder -->
                     <execution>
-                        <id>make-git-hooks-executable</id>
-                        <phase>validate</phase>
+                        <phase>package</phase>
                         <goals>
-                            <goal>exec</goal>
+                            <goal>run</goal>
                         </goals>
                         <configuration>
-                            <executable>chmod</executable>
-                            <arguments>
-                                <argument>777</argument>
-                                <argument>.git/hooks/*</argument>
-                            </arguments>
+                            <target>
+                                <copy todir=".git/hooks/">
+                                    <fileset dir="hooks/">
+                                        <include name="*"/>
+                                    </fileset>
+                                </copy>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <!-- Make the git hooks executable -->
+                    <execution>
+                        <id>make-git-hooks-executable</id>
+                        <phase>validate</phase> <!-- Runs early in the build -->
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <chmod perm="755">
+                                    <fileset dir=".git/hooks" includes="pre-push,commit-msg"/>
+                                </chmod>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>
