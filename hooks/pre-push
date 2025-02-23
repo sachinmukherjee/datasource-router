@@ -2,12 +2,14 @@
 echo "Running pre-push hook..."
 
 # Run code format check
+echo "Running code format check..."
 ./mvnw spotless:check
 if [ $? -ne 0 ]; then
   echo "Code format check failed. Please fix formatting issues."
   exit 1
 fi
 
+echo "Running unit tests..."
 # Run unit tests
 ./mvnw test
 if [ $? -ne 0 ]; then
@@ -16,6 +18,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Check code coverage (assuming JaCoCo is configured)
+echo "Checking code coverage..."
 COVERAGE=$(./mvnw jacoco:report | grep -Po '(?<=Instructions covered: )[0-9]+(?=%)')
 REQUIRED_COVERAGE=80
 if [ $COVERAGE -lt $REQUIRED_COVERAGE ]; then

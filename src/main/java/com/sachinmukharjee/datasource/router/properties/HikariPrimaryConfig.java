@@ -3,12 +3,11 @@ package com.sachinmukharjee.datasource.router.properties;
 import com.sachinmukharjee.datasource.router.constants.AppConstants;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-
-import javax.sql.DataSource;
 
 @Slf4j
 @ConfigurationProperties(prefix = AppConstants.PRIMARY_CONFIG_PREFIX)
