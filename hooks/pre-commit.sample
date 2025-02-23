@@ -1,0 +1,23 @@
+#!/bin/bash
+echo "Running commit message hook..."
+
+# Use passed file argument or fallback to default
+commit_message_file="${1:-.git/COMMIT_EDITMSG}"
+
+if [[ ! -f "$commit_message_file" ]]; then
+  echo "Error: Commit message file not found at $commit_message_file!"
+  exit 1
+fi
+
+commit_message=$(cat "$commit_message_file")
+echo "Commit message: $commit_message"
+
+pattern="^(feat|fix|chore|docs|style|refactor|test|perf)(\(\w+\))?: .{1,50}"
+
+if [[ ! $commit_message =~ $pattern ]]; then
+  echo "❌ Invalid commit message format. Use Conventional Commits (e.g., feat: add new endpoint)."
+  exit 1
+fi
+
+echo "✅ Commit message is valid."
+exit 0

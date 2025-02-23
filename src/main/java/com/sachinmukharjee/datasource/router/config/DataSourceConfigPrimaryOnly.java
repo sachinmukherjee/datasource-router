@@ -4,13 +4,12 @@ import com.sachinmukharjee.datasource.router.RoutingDataSource;
 import com.sachinmukharjee.datasource.router.constants.AppConstants;
 import com.sachinmukharjee.datasource.router.constants.RouteMode;
 import com.sachinmukharjee.datasource.router.properties.HikariPrimaryConfig;
+import java.util.Map;
+import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.sql.DataSource;
-import java.util.Map;
 
 @Slf4j
 @Configuration
