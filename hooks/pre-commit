@@ -1,0 +1,14 @@
+#!/bin/bash
+echo "Running commit message hook..."
+
+commit_message=$1
+echo "Commit message: $1"
+pattern="^(feat|fix|chore|docs|style|refactor|test|perf)(\(\w+\))?: .{1,50}"
+
+if [[ ! $commit_message =~ $pattern ]]; then
+  echo "Invalid commit message format. Use conventional commits (e.g., feat: add new endpoint)."
+  exit 1
+fi
+
+echo "Commit message is valid."
+exit 0
