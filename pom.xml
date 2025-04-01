@@ -13,19 +13,12 @@
     <version>0.1-SNAPSHOT</version>
     <name>datasource-router</name>
     <description>DataSource Router</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/sachinmukherjee/datasource-router</url>
+        </repository>
+    </distributionManagement>
     <properties>
         <java.version>17</java.version>
     </properties>
