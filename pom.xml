@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.sachinmukharjee</groupId>
     <artifactId>datasource-router</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1-RELEASE</version>
     <name>datasource-router</name>
     <description>DataSource Router</description>
     <distributionManagement>
